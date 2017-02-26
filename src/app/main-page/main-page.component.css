@@ -1,28 +1,32 @@
-.head-block {
-    background: #2e51a2;
-    color: #fff;
-    margin-bottom: 1px;
-    height: 50px;
-    margin-bottom: 10px;
-}
-.head-block a {
-    color: #fff;
-}
-.head-block .service-name a {
-    text-decoration: none;
-}
 .left-sidebar {
     background-color: rgb(237, 238, 240);
-}
-.service-name {
-    height: 100%;
-    font-size: 24pt;
 }
 .left-sidebar a {
     display: block;
     margin-bottom: 10px;
 }
-.header-menu-item {
-    padding-top: 13px;
-    text-align: center;
+
+/* Navigation link styles */
+nav a {
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-right: 10px;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #eee;
+    border-radius: 4px;
+    text-decoration: none;
+    width: 100%;
+}
+nav a:visited, nav a:link {
+    color: #607D8B;
+    text-decoration: none;
+}
+nav a:hover {
+    color: #039be5;
+    background-color: #CFD8DC;
+    text-decoration: none;
+}
+nav a.active {
+    color: #039be5;
 }
