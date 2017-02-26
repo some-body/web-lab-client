@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { TopMusicComponent } from './top-music/top-music.component';
 import { MyMusicComponent } from './my-music/my-music.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { MusicCardComponent } from './music-card/music-card.component';
+import { MusicCardsListComponent } from './music-cards-list/music-cards-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
@@ -30,9 +32,11 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
+        MainPageComponent,
         TopMusicComponent,
         MyMusicComponent,
-        MainPageComponent,
+        MusicCardComponent,
+        MusicCardsListComponent,
         PageNotFoundComponent
     ],
     imports: [
