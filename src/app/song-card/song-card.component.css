@@ -1,0 +1,24 @@
+.card {
+    border: solid 1px;
+}
+.card-img-top {
+    height: 292px;
+}
+.song-img-container {
+    text-align: center;
+}
+.card-info-block {
+    display: inline-block;
+}
+.add-btn {
+    margin-left: 7px;
+}
+.card-block {
+    padding: 5px 1.25rem;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
+}

@@ -1,0 +1,7 @@
+<div class="card-columns">
+    <song-card *ngFor="let song of model" 
+                [model]="song"
+                (addToCollection)="add($event)"
+                (removeFromCollection)="remove($event)">
+    </song-card>
+</div>

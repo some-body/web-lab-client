@@ -1,5 +1,7 @@
 .left-sidebar {
     background-color: rgb(237, 238, 240);
+    border-radius: 15px;
+    height: 140px;
 }
 .left-sidebar a {
     display: block;

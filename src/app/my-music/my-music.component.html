@@ -1,1 +1,5 @@
-<div>my-music</div>
+<h1>Моя музыка</h1>
+<hr />
+<song-cards-list [model]="songList"
+                 (removeFromCollection)="removeFromCollection($event)">
+</song-cards-list>

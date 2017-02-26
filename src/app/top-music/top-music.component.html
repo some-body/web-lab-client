@@ -1,2 +1,6 @@
 <h1>Вся музыка</h1>
-<music-cards-list [model]="musicList"></music-cards-list>
+<hr />
+<song-cards-list [model]="songList"
+                 (addToCollection)="addToCollection($event)"
+                 (removeFromCollection)="removeFromCollection($event)">
+</song-cards-list>
