@@ -17,7 +17,8 @@ export class AddNewSongComponent {
 
     onSubmit() {
         this.musicService.addNewSong(this.model, this.imgFile)
-            .then(song => console.log(song));
+            .then(song => console.log('Сохранено')) // TODO: Нормальное уведомление.
+            .then(() => this.clearForm());
     }
 
     onImgInputChange(event) {
@@ -28,5 +29,10 @@ export class AddNewSongComponent {
         } else {
             this.imgInputText = this.defaultImgInputText;
         }
+    }
+
+    clearForm() {
+        this.model = new Song();
+        this.imgInputText = this.defaultImgInputText;
     }
 }

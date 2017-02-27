@@ -21,21 +21,22 @@ export class MusicService {
 
     addNewSong(song: Song, imageFile: any): Promise<Song> {
         const imgEndpoint = this.imagesApiEndpoint;
-
-        return this.filesService.upload(this.imagesApiEndpoint, imageFile)
-            .then((uploadResult: UploadResult) => {
-                song.imageSrc = uploadResult.filename;
-                return this.http.post(this.apiEndpoint, song, this.getRequestOptions())
-                    .map((result: Response) => result.json())
-                    .map((result: Song) => result)
-                    .toPromise();
-            });
+        // TODO: Вынести в ImagesService.
+        if(imageFile) {
+            return this.filesService.upload(this.imagesApiEndpoint, imageFile)
+                .then((uploadResult: UploadResult) => {
+                    song.imageSrc = uploadResult.filename;
+                    return this.uploadSong(song);
+                });
+        } else {
+            song.imageSrc = null;
+            return this.uploadSong(song);
+        }
     }
 
     getSongsTop(): Promise<Song[]> {
         return this.http.get(this.apiEndpoint, this.getRequestOptions())
-            .map((result: Response) => result.json())
-            .map((result: Song[]) => result)
+            .map((result: Response) => this.extractSongsData(result))
             .toPromise();
     }
 
@@ -43,16 +44,14 @@ export class MusicService {
         const endpoint = this.apiEndpoint + `/collection`;
 
         return this.http.get(endpoint, this.getRequestOptions())
-            .map((result: Response) => result.json())
-            .map((result: Song[]) => result)
+            .map((result: Response) => this.extractSongsData(result))
             .toPromise();
     }
 
-    updateUserRating(id: number, newRating: number): Promise<number> {
+    updateUserRating(id: number, newRating: number): Promise<Song> {
         const endpoint = this.apiEndpoint + `/${id}`;
-        return this.http.post(endpoint, { userRating: newRating }, this.getRequestOptions())
-            .map((result: Response) => result.json())
-            .map((result: Song) => result.userRating)
+        return this.http.put(endpoint, { userRating: newRating }, this.getRequestOptions())
+            .map((result: Response) => this.extractSongData(result))
             .toPromise();
     }
 
@@ -67,6 +66,23 @@ export class MusicService {
         const endpoint = this.apiEndpoint + `/${id}/removeFromCollection`;
         return this.http.post(endpoint, { }, this.getRequestOptions())
             .map((result: Response) => null)
+            .toPromise();
+    }
+
+    private extractSongsData(res: Response): Song[] {
+        let songs = res.json();
+        return songs.map(s => new Song(s));
+    }
+
+    private extractSongData(res: Response): Song {
+        let song = res.json();
+        return new Song(song);
+    }
+
+    private uploadSong(song: Song): Promise<Song> {
+        return this.http.post(this.apiEndpoint, song, this.getRequestOptions())
+            .map((result: Response) => result.json())
+            .map((result: Song) => result)
             .toPromise();
     }
 

@@ -1,4 +1,4 @@
-<div class="card-columns">
+<div class="card-deck">
     <song-card *ngFor="let song of model" 
                 [model]="song"
                 (addToCollection)="add($event)"

@@ -3,12 +3,12 @@
         <img class="card-img-top" [src]="model.imageSrc" [alt]="model.fullName">
     </div>
     <div class="card-block">
-        <h4 class="card-title">{{model.singer}}</h4>
-        <p class="card-text">{{model.title}}</p>
+        <h4 class="card-title" [title]="model.singer">{{model.singer}}</h4>
+        <p class="card-text" [title]="model.title">{{model.title}}</p>
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <div>Рейтинг</div>
+            <div>Рейтинг ({{model.ratesCount}} оценок)</div>
             <ngb-rating readonly="true" [rate]="model.globalRating"></ngb-rating>
         </li>
         <li class="list-group-item">

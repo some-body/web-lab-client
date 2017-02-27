@@ -23,8 +23,8 @@ export class SongCardComponent {
         }
         console.log('new rating = ' + newRating);
         this.musicService.updateUserRating(this.model.id, newRating)
-            .then((result: number) => {
-                this.model.userRating = result;
+            .then((result: Song) => {
+                this.model = result;
             });
     }
 

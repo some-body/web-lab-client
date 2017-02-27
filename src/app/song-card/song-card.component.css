@@ -1,14 +1,20 @@
 .card {
     border: solid 1px;
 }
+.card:hover {
+    box-shadow: 0 0 16px rgba(0, 0, 0, .5);
+}
 .card-img-top {
-    height: 292px;
+    width: 100%;
 }
 .song-img-container {
     text-align: center;
+    border-bottom: solid 1px;    
 }
-.card-info-block {
-    display: inline-block;
+.card-block h4, .card-block h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .add-btn {
     margin-left: 7px;
