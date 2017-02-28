@@ -11,9 +11,13 @@ import { AddNewSongComponent } from './add-new-song/add-new-song.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { SongCardComponent } from './song-card/song-card.component';
 import { SongCardsListComponent } from './song-cards-list/song-cards-list.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MusicService } from './music.service';
 import { FilesService } from './files.service';
+import { AuthService } from './auth.service';
+import { SongsCollectionService } from './songs-collection.service';
 
 const appRoutes: Routes = [
     { 
@@ -28,8 +32,10 @@ const appRoutes: Routes = [
                 pathMatch: 'full'
             },
             { path: 'add-new-song', component: AddNewSongComponent }
-        ]
+        ],
     },
+    { path: 'login', component: LoginComponent },
+    { path: 'registration', component: RegistrationComponent },
     { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -42,6 +48,8 @@ const appRoutes: Routes = [
         AddNewSongComponent,
         SongCardComponent,
         SongCardsListComponent,
+        LoginComponent,
+        RegistrationComponent,
         PageNotFoundComponent
     ],
     imports: [
@@ -51,7 +59,7 @@ const appRoutes: Routes = [
         FormsModule,
         HttpModule
     ],
-    providers: [MusicService, FilesService],
+    providers: [MusicService, FilesService, AuthService, SongsCollectionService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

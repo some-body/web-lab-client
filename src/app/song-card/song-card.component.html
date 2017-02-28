@@ -11,12 +11,12 @@
             <div>Рейтинг ({{model.ratesCount}} оценок)</div>
             <ngb-rating readonly="true" [rate]="model.globalRating"></ngb-rating>
         </li>
-        <li class="list-group-item">
+        <li [hidden]="!isAuthorized" class="list-group-item">
             <div>Личный рейтинг</div>
             <ngb-rating [rate]="model.userRating" (rateChange)="rateChange($event)"></ngb-rating>
         </li>
     </ul>
-    <div class="card-block">
+    <div [hidden]="!isAuthorized" class="card-block">
         <section *ngIf="!model.inCollection">
             <i class="fa fa-plus-circle green" aria-hidden="true"></i>
             <a class="add-btn" href="javascript:" (click)="add()">Добавить в коллекцию</a>

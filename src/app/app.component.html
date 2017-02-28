@@ -5,10 +5,13 @@
             <a routerLink="/top">MyMusicList</a>
         </div>
         <div class="col-md-1 header-menu-item">
-            <a routerLink="/user">Олег</a>
+            <a routerLink="/user">{{username}}</a>
         </div>
-        <div class="col-md-1 header-menu-item">
-            Выход
+        <div [hidden]="!isAuthorized" class="col-md-1 header-menu-item">
+            <a href="javascript:" (click)="logout()">Выход</a>
+        </div>
+        <div [hidden]="isAuthorized" class="col-md-1 header-menu-item">
+            <a routerLink="/login">Вход</a>
         </div>
     </div>
     <router-outlet></router-outlet>

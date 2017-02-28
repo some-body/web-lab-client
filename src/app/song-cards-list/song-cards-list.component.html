@@ -1,6 +1,7 @@
 <div class="card-deck">
     <song-card *ngFor="let song of model" 
                 [model]="song"
+                [isAuthorized]="isAuthorized"
                 (addToCollection)="add($event)"
                 (removeFromCollection)="remove($event)">
     </song-card>

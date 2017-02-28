@@ -9,6 +9,7 @@ import { MusicService } from '../music.service';
 })
 export class SongCardComponent {
     @Input() model: Song;
+    @Input() isAuthorized: boolean;
 
     @Output() addToCollection: EventEmitter<Song> = new EventEmitter<Song>();
     @Output() removeFromCollection: EventEmitter<Song> = new EventEmitter<Song>();
@@ -21,7 +22,6 @@ export class SongCardComponent {
         if(this.model.userRating === newRating) {
             return;
         }
-        console.log('new rating = ' + newRating);
         this.musicService.updateUserRating(this.model.id, newRating)
             .then((result: Song) => {
                 this.model = result;

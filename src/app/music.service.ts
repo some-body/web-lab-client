@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Song } from './song.model';
 import { UploadResult } from './upload-result.model';
 import { FilesService } from './files.service';
+import { SongsCollectionService } from './songs-collection.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -12,10 +13,12 @@ import 'rxjs/add/operator/toPromise';
 export class MusicService {
     private token: string = 'kokoko'; // TODO: Токен получать после авторизации.
     private apiEndpoint: string = 'http://localhost:4200/api/songs';
+    private collectionApiEndpoint: string = 'http://localhost:4200/api/user/songs';
     private imagesApiEndpoint: string = 'http://localhost:4200/api/images';
 
     constructor(private http: Http, 
-                private filesService: FilesService) 
+                private filesService: FilesService,
+                private songsCollectionService: SongsCollectionService) 
     {
     }
 
@@ -41,11 +44,7 @@ export class MusicService {
     }
 
     getSongsCollection(): Promise<Song[]> {
-        const endpoint = this.apiEndpoint + `/collection`;
-
-        return this.http.get(endpoint, this.getRequestOptions())
-            .map((result: Response) => this.extractSongsData(result))
-            .toPromise();
+        return this.songsCollectionService.getSongsCollection();
     }
 
     updateUserRating(id: number, newRating: number): Promise<Song> {
@@ -56,17 +55,11 @@ export class MusicService {
     }
 
     addToCollection(id: number): Promise<void> {
-        const endpoint = this.apiEndpoint + `/${id}/addToCollection`;
-        return this.http.post(endpoint, { }, this.getRequestOptions())
-            .map((result: Response) => null)
-            .toPromise();
+        return this.songsCollectionService.addToCollection(id);
     }
 
     removeFromCollection(id: number): Promise<void> {
-        const endpoint = this.apiEndpoint + `/${id}/removeFromCollection`;
-        return this.http.post(endpoint, { }, this.getRequestOptions())
-            .map((result: Response) => null)
-            .toPromise();
+        return this.songsCollectionService.removeFromCollection(id);
     }
 
     private extractSongsData(res: Response): Song[] {

@@ -2,14 +2,23 @@ import { Component } from '@angular/core';
 import { Song } from '../song.model';
 import { MusicService } from '../music.service';
 
+// Auth.
+import { Router } from "@angular/router";
+import { LoginRequired } from '../login-required.abstract';
+import { AuthService } from '../auth.service';
+
 @Component({
     selector: 'my-music',
     templateUrl: './my-music.component.html'
 })
-export class MyMusicComponent {
+export class MyMusicComponent extends LoginRequired {
     songList: Song[] = [];
 
-    constructor(private musicService: MusicService) {
+    constructor(private musicService: MusicService,
+                router: Router,
+                authService: AuthService)
+    {
+        super(router, authService);
         this.initData();
     }
 
