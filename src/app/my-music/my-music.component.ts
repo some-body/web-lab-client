@@ -22,6 +22,11 @@ export class MyMusicComponent extends LoginRequired {
         this.initData();
     }
 
+    onNavigationEnd() {
+        super.onNavigationEnd();
+        //this.initData();
+    }
+
     removeFromCollection(song: Song) {
         this.musicService.removeFromCollection(song.id)
             .then(result => {

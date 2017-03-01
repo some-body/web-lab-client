@@ -15,7 +15,7 @@ export class SongsCollectionService {
 
     getSongsCollection(): Promise<Song[]> {
         return this.http.get(this.collectionApiEndpoint, this.authService.requestOptions)
-            .map((result: Response) => this.extractSongsData(result))
+            .map(this.extractSongsData)
             .toPromise();
     }
 
@@ -30,6 +30,13 @@ export class SongsCollectionService {
         const endpoint = this.collectionApiEndpoint + `/${id}`;
         return this.http.delete(endpoint, this.authService.requestOptions)
             .map(r => null)
+            .toPromise();
+    }
+
+    updateUserRating(id: number, newRating: number): Promise<Song> {
+        const endpoint = this.collectionApiEndpoint + `/${id}/rate/${newRating}`;
+        return this.http.post(endpoint, {}, this.authService.requestOptions)
+            .map(this.extractSongData)
             .toPromise();
     }
 

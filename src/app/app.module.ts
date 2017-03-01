@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { LocalStorageModule } from 'angular-2-local-storage';
 import { AppComponent } from './app.component';
 import { TopMusicComponent } from './top-music/top-music.component';
 import { MyMusicComponent } from './my-music/my-music.component';
@@ -57,7 +58,11 @@ const appRoutes: Routes = [
         NgbModule.forRoot(),
         BrowserModule,
         FormsModule,
-        HttpModule
+        HttpModule,
+        LocalStorageModule.withConfig({
+            prefix: 'app-root',
+            storageType: 'localStorage'
+        })
     ],
     providers: [MusicService, FilesService, AuthService, SongsCollectionService],
     bootstrap: [AppComponent]

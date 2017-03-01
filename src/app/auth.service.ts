@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { Token } from './token.model';
 import { User } from './user.model';
 import { LoginResult } from './login-result.model';
@@ -8,18 +9,22 @@ import { LoginResult } from './login-result.model';
 @Injectable()
 export class AuthService {
     private userApiEndpoint = '/api/user';
-    private loginResult: LoginResult;
+    private localstorageKey = 'login-result';
     
     get token(): string {
-        return this.loginResult ? this.loginResult.token.value : null;
+        let loginResult = this.getLoginResult();
+        return loginResult ? loginResult.token.value : null;
     }
 
     get isAuthorized(): boolean {
+        let loginResult = this.getLoginResult();
+        if(!loginResult) {
+            return false;
+        }
         let currDate = new Date();
-        return !!this.loginResult
-            && !!this.loginResult.token
-            && !!this.loginResult.token.expires
-            && this.loginResult.token.expires > currDate;
+        let expiresDate = new Date(loginResult.token.expires);
+        return true;
+        //return expiresDate > currDate;
     }
 
     get requestOptions() {
@@ -29,11 +34,13 @@ export class AuthService {
     }
 
     get username(): string {
-        return this.loginResult ? this.loginResult.username : '';
+        let loginResult = this.getLoginResult();
+        return loginResult ? loginResult.username : '';
     }
 
-    constructor(private http: Http) {
-        // TODO: Загружать токен из LocalStorage.
+    constructor(private http: Http,
+                private localStorageService: LocalStorageService) 
+    {
     }
 
     login(login: string, password: string): Promise<void> {
@@ -46,7 +53,7 @@ export class AuthService {
     logout(): Promise<void> {
         let endpoint = this.userApiEndpoint + '/logout';
         return this.http.post(endpoint, { }, this.requestOptions)
-            .map(r => this.loginResult = null)
+            .map(r => this.clearLoginResult())
             .toPromise();
     }
 
@@ -59,6 +66,19 @@ export class AuthService {
 
     private extractData(res: Response) {
         let obj = res.json();
-        this.loginResult = LoginResult.fromJSON(obj);
+        let loginResult = LoginResult.fromJSON(obj);
+        this.setLoginResult(loginResult);
+    }
+
+    private clearLoginResult() {
+        this.localStorageService.remove(this.localstorageKey);
+    }
+
+    private getLoginResult(): LoginResult {
+        return this.localStorageService.get<LoginResult>(this.localstorageKey);
+    }
+
+    private setLoginResult(loginResult: LoginResult) {
+        this.localStorageService.add(this.localstorageKey, loginResult);
     }
 }

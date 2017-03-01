@@ -5,20 +5,21 @@ import { Song } from './song.model';
 import { UploadResult } from './upload-result.model';
 import { FilesService } from './files.service';
 import { SongsCollectionService } from './songs-collection.service';
+import { AuthService } from './auth.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class MusicService {
-    private token: string = 'kokoko'; // TODO: Токен получать после авторизации.
     private apiEndpoint: string = 'http://localhost:4200/api/songs';
     private collectionApiEndpoint: string = 'http://localhost:4200/api/user/songs';
     private imagesApiEndpoint: string = 'http://localhost:4200/api/images';
 
     constructor(private http: Http, 
                 private filesService: FilesService,
-                private songsCollectionService: SongsCollectionService) 
+                private songsCollectionService: SongsCollectionService,
+                private authService: AuthService)
     {
     }
 
@@ -38,7 +39,7 @@ export class MusicService {
     }
 
     getSongsTop(): Promise<Song[]> {
-        return this.http.get(this.apiEndpoint, this.getRequestOptions())
+        return this.http.get(this.apiEndpoint, this.authService.requestOptions)
             .map((result: Response) => this.extractSongsData(result))
             .toPromise();
     }
@@ -48,10 +49,7 @@ export class MusicService {
     }
 
     updateUserRating(id: number, newRating: number): Promise<Song> {
-        const endpoint = this.apiEndpoint + `/${id}`;
-        return this.http.put(endpoint, { userRating: newRating }, this.getRequestOptions())
-            .map((result: Response) => this.extractSongData(result))
-            .toPromise();
+        return this.songsCollectionService.updateUserRating(id, newRating);
     }
 
     addToCollection(id: number): Promise<void> {
@@ -73,15 +71,9 @@ export class MusicService {
     }
 
     private uploadSong(song: Song): Promise<Song> {
-        return this.http.post(this.apiEndpoint, song, this.getRequestOptions())
+        return this.http.post(this.apiEndpoint, song, this.authService.requestOptions)
             .map((result: Response) => result.json())
             .map((result: Song) => result)
             .toPromise();
-    }
-
-    private getRequestOptions() {
-        let headers = new Headers();
-        headers.append('token', this.token);
-        return { headers: headers };
     }
 }

@@ -19,7 +19,7 @@ export class SongCardComponent {
     }
 
     rateChange(newRating: number) {
-        if(this.model.userRating === newRating) {
+        if(this.model.userRating == newRating) {
             return;
         }
         this.musicService.updateUserRating(this.model.id, newRating)
