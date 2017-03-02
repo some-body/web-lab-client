@@ -4,8 +4,8 @@ import { OnNavigationEnd } from './on-navigation-end';
 
 
 export class LoginRequired extends OnNavigationEnd {
-    constructor(private router: Router, 
-                private authService: AuthService) 
+    constructor(protected router: Router, 
+                protected authService: AuthService) 
     {
         super(router);
     }

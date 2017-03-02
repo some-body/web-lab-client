@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [class.small-card]="!isAuthorized" [class.big-card]="isAuthorized">
     <div class="song-img-container">
         <img class="card-img-top" [src]="model.imageSrc" [alt]="model.fullName">
     </div>

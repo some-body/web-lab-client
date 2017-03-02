@@ -5,9 +5,11 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { Token } from './token.model';
 import { User } from './user.model';
 import { LoginResult } from './login-result.model';
+import { OnNavigationEnd } from './on-navigation-end';
+import { Router } from "@angular/router";
 
 @Injectable()
-export class AuthService {
+export class AuthService extends OnNavigationEnd {
     private userApiEndpoint = '/api/user';
     private localstorageKey = 'login-result';
     
@@ -39,14 +41,31 @@ export class AuthService {
     }
 
     constructor(private http: Http,
-                private localStorageService: LocalStorageService) 
+                private localStorageService: LocalStorageService,
+                router: Router) 
     {
+        super(router);
+    }
+
+    onNavigationEnd() {
+        return this.http.get(this.userApiEndpoint, this.requestOptions)
+            .map((res: Response) => this.extractUserData(res))
+            .subscribe(() => {}, () => {    // Если все хорошо -- ничего не делаем.
+                this.clearLoginResult();
+                console.log('Необходима авторизация');
+            });
+    }
+
+    getCurrentUser(): Promise<User> {
+        return this.http.get(this.userApiEndpoint, this.requestOptions)
+            .map((res: Response) => this.extractUserData(res))
+            .toPromise();
     }
 
     login(login: string, password: string): Promise<void> {
         let endpoint = this.userApiEndpoint + '/login';
         return this.http.post(endpoint, {login: login, password: password})
-            .map((res: Response) => this.extractData(res))
+            .map((res: Response) => this.extractLoginResultData(res))
             .toPromise();
     }
 
@@ -60,11 +79,17 @@ export class AuthService {
     registrate(user: User): Promise<void> {
         let endpoint = this.userApiEndpoint + '/register';
         return this.http.post(endpoint, user)
-            .map((res: Response) => this.extractData(res))
+            .map((res: Response) => this.extractLoginResultData(res))
             .toPromise();
     }
 
-    private extractData(res: Response) {
+    private extractUserData(res: Response): User {
+        let obj = res.json();
+        let user = User.fromJSON(obj);
+        return user;
+    }
+
+    private extractLoginResultData(res: Response) {
         let obj = res.json();
         let loginResult = LoginResult.fromJSON(obj);
         this.setLoginResult(loginResult);

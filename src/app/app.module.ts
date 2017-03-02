@@ -6,10 +6,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { AppComponent } from './app.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { UserComponent } from './user/user.component';
 import { TopMusicComponent } from './top-music/top-music.component';
 import { MyMusicComponent } from './my-music/my-music.component';
 import { AddNewSongComponent } from './add-new-song/add-new-song.component';
-import { MainPageComponent } from './main-page/main-page.component';
 import { SongCardComponent } from './song-card/song-card.component';
 import { SongCardsListComponent } from './song-cards-list/song-cards-list.component';
 import { LoginComponent } from './login/login.component';
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
                 redirectTo: 'top',
                 pathMatch: 'full'
             },
-            { path: 'add-new-song', component: AddNewSongComponent }
+            { path: 'add-new-song', component: AddNewSongComponent },
+            { path: 'user', component: UserComponent }
         ],
     },
     { path: 'login', component: LoginComponent },
@@ -44,6 +46,7 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
         MainPageComponent,
+        UserComponent,
         TopMusicComponent,
         MyMusicComponent,
         AddNewSongComponent,

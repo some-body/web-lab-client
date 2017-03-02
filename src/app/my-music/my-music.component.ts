@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { Song } from '../song.model';
 import { MusicService } from '../music.service';
-
-// Auth.
 import { Router } from "@angular/router";
-import { LoginRequired } from '../login-required.abstract';
 import { AuthService } from '../auth.service';
+import { LoginRequired } from '../login-required.abstract';
 
 @Component({
     selector: 'my-music',
@@ -24,7 +22,6 @@ export class MyMusicComponent extends LoginRequired {
 
     onNavigationEnd() {
         super.onNavigationEnd();
-        //this.initData();
     }
 
     removeFromCollection(song: Song) {

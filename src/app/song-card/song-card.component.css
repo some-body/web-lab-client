@@ -1,3 +1,9 @@
+.big-card {
+    height: 534px;
+}
+.small-card {
+    height: 431px;
+}
 .card {
     border: solid 1px;
 }
