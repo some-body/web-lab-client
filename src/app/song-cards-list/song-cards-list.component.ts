@@ -6,7 +6,7 @@ import { OnNavigationEnd } from '../on-navigation-end';
 @Component({
     selector: 'song-cards-list',
     templateUrl: './song-cards-list.component.html',
-    styleUrls: ['./song-cards-list.component.css'] 
+    styleUrls: ['./song-cards-list.component.scss'] 
 })
 export class SongCardsListComponent {
     @Input() model: Song[];

@@ -7,7 +7,7 @@ import { LoginRequired } from '../login-required.abstract';
 @Component({
     selector: 'user',
     templateUrl: './user.component.html',
-    styleUrls: ['./user.component.css'] 
+    styleUrls: ['./user.component.scss'] 
 })
 export class UserComponent extends LoginRequired {
      model: User = new User();

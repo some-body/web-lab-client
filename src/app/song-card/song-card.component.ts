@@ -5,7 +5,7 @@ import { MusicService } from '../services/music.service';
 @Component({
     selector: 'song-card',
     templateUrl: './song-card.component.html',
-    styleUrls: ['./song-card.component.css'] 
+    styleUrls: ['./song-card.component.scss'] 
 })
 export class SongCardComponent {
     @Input() model: Song;
