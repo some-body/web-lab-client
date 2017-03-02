@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { Song } from './song.model';
-import { UploadResult } from './upload-result.model'
+import { Song } from '../models/song.model';
+import { UploadResult } from '../models/upload-result.model'
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
-import { Song } from './song.model';
-import { UploadResult } from './upload-result.model';
+import { Song } from '../models/song.model';
+import { UploadResult } from '../models/upload-result.model';
 import { FilesService } from './files.service';
 import { SongsCollectionService } from './songs-collection.service';
 import { AuthService } from './auth.service';

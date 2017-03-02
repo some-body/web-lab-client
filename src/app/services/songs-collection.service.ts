@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
-import { Song } from './song.model';
+import { Song } from '../models/song.model';
 import { AuthService } from './auth.service';
 
 @Injectable()

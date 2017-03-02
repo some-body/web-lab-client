@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Song } from '../song.model'
-import { AuthService } from '../auth.service';
+import { Song } from '../models/song.model'
+import { AuthService } from '../services/auth.service';
 import { OnNavigationEnd } from '../on-navigation-end';
 
 @Component({

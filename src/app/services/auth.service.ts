@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { Token } from './token.model';
-import { User } from './user.model';
-import { LoginResult } from './login-result.model';
-import { OnNavigationEnd } from './on-navigation-end';
+import { Token } from '../models/token.model';
+import { User } from '../models/user.model';
+import { LoginResult } from '../models/login-result.model';
+import { OnNavigationEnd } from '../on-navigation-end';
 import { Router } from "@angular/router";
 
 @Injectable()

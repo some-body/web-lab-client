@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Song } from '../song.model';
-import { MusicService } from '../music.service';
+import { Song } from '../models/song.model';
+import { MusicService } from '../services/music.service';
 import { Router } from "@angular/router";
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { LoginRequired } from '../login-required.abstract';
 
 @Component({

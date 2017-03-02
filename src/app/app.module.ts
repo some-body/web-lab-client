@@ -16,10 +16,10 @@ import { SongCardsListComponent } from './song-cards-list/song-cards-list.compon
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { MusicService } from './music.service';
-import { FilesService } from './files.service';
-import { AuthService } from './auth.service';
-import { SongsCollectionService } from './songs-collection.service';
+import { MusicService } from './services/music.service';
+import { FilesService } from './services/files.service';
+import { AuthService } from './services/auth.service';
+import { SongsCollectionService } from './services/songs-collection.service';
 
 const appRoutes: Routes = [
     { 

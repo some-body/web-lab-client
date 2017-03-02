@@ -1,5 +1,5 @@
 import { Router, NavigationEnd } from "@angular/router";
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { OnNavigationEnd } from './on-navigation-end';
 
 
