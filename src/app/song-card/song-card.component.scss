@@ -1,32 +1,35 @@
+.card {
+    border: solid 1px;
+
+    .song-img-container {
+        text-align: center;
+        border-bottom: solid 1px;
+
+        .card-img-top {
+            width: 100%;
+        }
+    }
+    .card-block {
+        padding: 5px 1.25rem;
+
+        h4 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .add-btn {
+            margin-left: 7px;
+        }
+    }
+}
+.card:hover {
+    box-shadow: 0 0 16px rgba(0, 0, 0, .5);
+}
 .big-card {
     height: 534px;
 }
 .small-card {
     height: 431px;
-}
-.card {
-    border: solid 1px;
-}
-.card:hover {
-    box-shadow: 0 0 16px rgba(0, 0, 0, .5);
-}
-.card-img-top {
-    width: 100%;
-}
-.song-img-container {
-    text-align: center;
-    border-bottom: solid 1px;    
-}
-.card-block h4, .card-block h4 {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.add-btn {
-    margin-left: 7px;
-}
-.card-block {
-    padding: 5px 1.25rem;
 }
 .green {
     color: green;
