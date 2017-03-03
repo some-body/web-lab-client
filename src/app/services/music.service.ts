@@ -12,9 +12,9 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class MusicService {
-    private apiEndpoint: string = 'http://localhost:4200/api/songs';
-    private collectionApiEndpoint: string = 'http://localhost:4200/api/user/songs';
-    private imagesApiEndpoint: string = 'http://localhost:4200/api/images';
+    private apiEndpoint: string = '/api/songs';
+    private collectionApiEndpoint: string = '/api/user/songs';
+    private imagesApiEndpoint: string = '/api/images';
 
     constructor(private http: Http, 
                 private filesService: FilesService,

@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class SongsCollectionService {
-    private collectionApiEndpoint: string = 'http://localhost:4200/api/user/songs';
+    private collectionApiEndpoint: string = '/api/user/songs';
 
     constructor(private http: Http,
                 private authService: AuthService) 
