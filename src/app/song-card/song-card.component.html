@@ -17,6 +17,8 @@
         </li>
     </ul>
     <div [hidden]="!isAuthorized" class="card-block">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <a [href]="link" target="_blank">Поиск на Yandex музыке</a>
         <section *ngIf="!model.inCollection">
             <i class="fa fa-plus-circle green" aria-hidden="true"></i>
             <a class="add-btn" href="javascript:" (click)="add()">Добавить в коллекцию</a>

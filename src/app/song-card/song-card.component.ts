@@ -15,6 +15,11 @@ export class SongCardComponent {
     @Output() removeFromCollection: EventEmitter<Song> = new EventEmitter<Song>();
     @Output() inCollectionChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+
+    get link() {
+        return `https://music.yandex.ru/search?text=${this.model.fullName}`;
+    }
+
     constructor(private musicService: MusicService) {
     }
 
